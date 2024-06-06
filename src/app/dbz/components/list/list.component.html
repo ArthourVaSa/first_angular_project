@@ -1,7 +1,7 @@
-<h4>Listado</h4>
+<h3>Listado</h3>
 <ul class="list-group">
   <li
-    class="list-group-item"
+    class="list-group-item d-flex justify-content-between align-items-center"
     [ngClass]="{'list-group-item-success': isFirst, 'list-group-item-danger': isLast,}"
     *ngFor="
       let character of charecterList;
@@ -12,9 +12,19 @@
       let isOdd = odd
     "
   >
-    <span class="text-primary">{{ index + 1 }}. </span>
-    <span>{{ character.name }} - </span>
-    <strong>Power: </strong>
-    <span>{{ character.power }}</span>
+    <div>
+      <span class="text-primary">{{ index + 1 }}. </span>
+      <span>{{ character.name }} - </span>
+      <strong>Power: </strong>
+      <span>{{ character.power }}</span>
+    </div>
+
+    <button class="btn btn-danger" (click)="onDeleteCharacter(character.id)">X</button>
   </li>
+
+  <div *ngIf="charecterList.length !== 0; else nothingCharacterWasAdded">
+  </div>
+  <ng-template #nothingCharacterWasAdded>
+    <h4 class="text-danger">No ha agregado ningún personaje</h4>
+  </ng-template>
 </ul>
